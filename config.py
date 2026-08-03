@@ -82,5 +82,14 @@ class Config:
     LOG_LEVEL = "INFO"
 
 
+    # ==========================================
+    # SHOPIFY OAUTH
+    # ==========================================
+
+    SHOPIFY_CLIENT_ID = "8f4fac2a7b2e685dbc654fc421bd4776"
+    SHOPIFY_CLIENT_SECRET = ""
+    SHOPIFY_REDIRECT_URI = "https://site--ai-commerce-os--sm2wxhqvtd97.code.run/shopify/callback"
+
+
 config = Config()
 print("Refresh Token Exists:", hasattr(config, "EBAY_REFRESH_TOKEN"))

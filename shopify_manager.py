@@ -41,9 +41,32 @@ class ShopifyManager:
 
             return True
 
-        print("🚀 Uploading Product To Shopify...")
-        # Real API code yahan baad mein add hoga
-        return True
+        url = f"https://{self.store_url}/admin/api/2026-01/products.json"
+
+        payload = {
+            "product": {
+                "title": listing["title"],
+                "body_html": listing.get("description", ""),
+                "vendor": "AI Store Manager",
+                "variants": [
+                    {
+                        "price": str(listing["price"]),
+                        "inventory_quantity": listing.get("stock", 10)
+                    }
+                ]
+            }
+        }
+
+        response = requests.post(
+            url,
+            headers=self.headers(),
+            json=payload
+        )
+
+        print("Shopify Response:", response.status_code)
+        print(response.text)
+
+        return response.status_code == 201
 
     # ----------------------------
 

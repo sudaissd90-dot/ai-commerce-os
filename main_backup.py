@@ -19,7 +19,7 @@ import agent_analysis_setup
 import supplier_setup
 
 from autopilot_workflow import autopilot_workflow
-from shopify_manager import shopify
+from ebay_manager import ebay
 from database import db
 
 
@@ -62,12 +62,12 @@ print("\n========== EBAY MANAGER CHECK ==========")
 
 print(
     "create_offer:",
-    # hasattr(ebay, "create_offer")
+    hasattr(ebay, "create_offer")
 )
 
 print(
     "create_inventory_location:",
-    # hasattr(ebay, "create_inventory_location")
+    hasattr(ebay, "create_inventory_location")
 )
 
 print("========================================")
@@ -90,7 +90,7 @@ print("✅ Database Module Loaded")
 print("\n🧪 Testing eBay Connection...\n")
 
 
-# ebay.test_connection()
+ebay.test_connection()
 
 
 # ==============================

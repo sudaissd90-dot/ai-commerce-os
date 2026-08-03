@@ -1,6 +1,12 @@
 from ai_agent_manager import ai_agent_manager
 from database import db
-from ebay_manager import ebay
+from shopify_manager import shopify
+from config import config
+
+shopify.connect(
+    config.SHOPIFY_STORE_URL,
+    config.SHOPIFY_ACCESS_TOKEN
+)
 
 print("🔥 NEW AUTOPILOT FILE LOADED")
 
@@ -109,7 +115,7 @@ class AutoPilotWorkflow:
                     )
 
 
-                    ebay.create_listing(listing)
+                    shopify.create_product(listing)
 
 
 
@@ -155,8 +161,8 @@ class AutoPilotWorkflow:
                     product
                 )
 
-                # Upload to eBay
-                ebay.create_listing(listing)
+                # Upload to Shopify
+                shopify.create_product(listing)
 
                 approved.append(
                     {

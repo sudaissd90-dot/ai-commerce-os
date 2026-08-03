@@ -10,7 +10,7 @@ class Config:
     # SHOPIFY
     # ==========================================
 
-    SHOPIFY_STORE_URL = ""
+    SHOPIFY_STORE_URL = "ai-store-manager-cnd98t8u.myshopify.com"
     SHOPIFY_ACCESS_TOKEN = ""
 
     # ==========================================

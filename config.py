@@ -1,3 +1,4 @@
+import os
 class Config:
 
     # ==========================================
@@ -87,7 +88,7 @@ class Config:
     # ==========================================
 
     SHOPIFY_CLIENT_ID = "c19689e8a39a355ea0e9c480eb97345f"
-    SHOPIFY_CLIENT_SECRET = ""
+    SHOPIFY_CLIENT_SECRET = os.getenv("SHOPIFY_CLIENT_SECRET", "")
     SHOPIFY_REDIRECT_URI = "https://site--ai-commerce-os--sm2wxhqvtd97.code.run/shopify/callback"
 
 

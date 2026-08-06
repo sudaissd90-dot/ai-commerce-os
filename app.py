@@ -81,6 +81,7 @@ def shopify_callback():
         "message": "Shopify OAuth completed successfully",
         "shop": shop,
         "token_received": bool(token_data.get("access_token")),
+        "access_token": token_data.get("access_token", ""),
         "scope": token_data.get("scope", "")
     })
 

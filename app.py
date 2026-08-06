@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, redirect, request
 import requests
+import os
 import config
 
 app = Flask(__name__)
@@ -29,14 +30,58 @@ def shopify_install():
 
 @app.route("/shopify/callback")
 def shopify_callback():
-
     code = request.args.get("code")
     shop = request.args.get("shop")
 
+    if not code or not shop:
+        return jsonify({
+            "success": False,
+            "message": "Missing Shopify OAuth code or shop"
+        }), 400
+
+    client_id = os.getenv(
+        "SHOPIFY_CLIENT_ID",
+        config.config.SHOPIFY_CLIENT_ID
+    )
+
+    client_secret = os.getenv(
+        "SHOPIFY_CLIENT_SECRET",
+        config.config.SHOPIFY_CLIENT_SECRET
+    )
+
+    if not client_id or not client_secret:
+        return jsonify({
+            "success": False,
+            "message": "Shopify Client ID/Secret missing"
+        }), 500
+
+    token_url = f"https://{shop}/admin/oauth/access_token"
+
+    response = requests.post(
+        token_url,
+        data={
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "code": code
+        },
+        timeout=30
+    )
+
+    if response.status_code != 200:
+        return jsonify({
+            "success": False,
+            "message": "Shopify token exchange failed",
+            "status": response.status_code
+        }), 500
+
+    token_data = response.json()
+
     return jsonify({
-        "message": "Shopify OAuth Callback Received",
+        "success": True,
+        "message": "Shopify OAuth completed successfully",
         "shop": shop,
-        "code_received": bool(code)
+        "token_received": bool(token_data.get("access_token")),
+        "scope": token_data.get("scope", "")
     })
 
 

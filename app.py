@@ -71,7 +71,7 @@ def shopify_callback():
         return jsonify({
             "success": False,
             "message": "Shopify token exchange failed",
-            "status": response.status_code
+            "status": response.status_code, "shopify_error": response.text
         }), 500
 
     token_data = response.json()

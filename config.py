@@ -12,7 +12,7 @@ class Config:
     # ==========================================
 
     SHOPIFY_STORE_URL = "ai-store-manager-cnd98t8u.myshopify.com"
-    SHOPIFY_ACCESS_TOKEN = ""
+    SHOPIFY_ACCESS_TOKEN = os.getenv("SHOPIFY_ACCESS_TOKEN", "")
 
     # ==========================================
     # EBAY SANDBOX

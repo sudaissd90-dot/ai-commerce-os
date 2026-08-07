@@ -39,7 +39,7 @@ class ShopifyManager:
             ""
         )
 
-        self.access_token = ""
+        self.access_token = os.getenv("SHOPIFY_ACCESS_TOKEN", "").strip()
 
         self.token_expires_at = 0
 
